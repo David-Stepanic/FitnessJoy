@@ -52,15 +52,3 @@
   (<= 16 score 30) "Intermediate level"
   (>= score 31) "Advanced level")
 
-
-
-
-
-
-
-
-
-
-
-
-
