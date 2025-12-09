@@ -22,9 +22,9 @@
 
 ; Advent of Code Day 1 - part two
 
-; CLASS VERSION - didn't check if we start from zero, and also algorithm
+; CLASS VERSION - didn't check starting from zero, and also algorithm
 ; was increasing counter even if safe stops on zero, which is wrong because
-; result includes only if we during rotations pass zero
+; the result includes only the cases where we pass zero during the rotations
 
 (reduce (fn [[cnt move sum] e]
           [(if (= (mod (+ sum e) 100) 0)
