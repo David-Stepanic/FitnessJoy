@@ -52,3 +52,33 @@
   (<= 16 score 30) "Intermediate level"
   (>= score 31) "Advanced level")
 
+(def users (hash-map :Marko "Beginner" :Lazar "Intermediate" :Milos "Advanced"))
+
+(def user-names (map name (keys users)))
+
+(def user-levels (vals users))
+
+(defn add-user [first last age level hybrid]
+                {:first-name first
+                 :last-name last
+                 :age age
+                 :level level
+                 :hybrid hybrid})
+
+(def user1 (add-user "Lazar" "Hrebeljanovic" 24 "Advanced" "No"))
+(def user2 (add-user "Milos" "Obilic" 29 "Intermediate" "Yes"))
+(def user3 (add-user "Novak" "Djokovic" 38 "Advanced" "No"))
+(def user4 (add-user "Jovan" "Jovanovic" 18 "Beginner" "No"))
+(def user5 (add-user "Jovan" "Memedovic" 58 "Beginner" "Yes"))
+
+(defn get-user [{:keys [first-name last-name age level hybrid]}]
+                (println first-name last-name age))
+
+(get-user user1)
+
+; Print -> Lazar Hrebeljanovic 24
+
+
+
+
+
