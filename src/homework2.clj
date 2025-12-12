@@ -38,11 +38,20 @@
 
 ; result => ["David" "Milovan"]
 
+(defn my-filter [f s]
+  (reduce (fn [acc e]
+            )
+          []
+          s))
 
 
+(def x {:a "a"
+        :content [{:c 1
+                   :content [{:d 5
+                              :content [6]}]}]})
 
-
-
+(def x
+  (assoc-in x [:content :content :content 0] 7))
 
 
 

@@ -1,4 +1,5 @@
-(ns functions)
+(ns project
+  (:require [clj-http.client :as client]))
 
 ;  Testing average function
 
@@ -78,7 +79,34 @@
 
 ; Print -> Lazar Hrebeljanovic 24
 
+; Function Assign level - Checks if selected level is correct for user's score
 
+; Simulation fetching live fitness data from user's smartwatch
 
+(defn fetch-json [url]
+  (let [response (client/get url {:as :json})]
+    (:body response)))
 
+ (def data (fetch-json "https://mocki.io/v1/4350f790-594d-4936-b740-62c218fe6abc"))
+
+(def numbers  (map #(/ % 10) (range 5 11)))
+
+(map #(double %) numbers)
+; => (0.5 0.6 0.7 0.8 0.9 1.0)
+
+(def doubleNums (map #(double %) numbers))
+
+(defn random-number []
+  (nth doubleNums (rand-int (count doubleNums))))
+
+(defn update-data [m]
+  (reduce-kv
+    (fn [acc k v]
+      (assoc acc k
+                (cond
+                  (map? v) (update-data v)
+                  (number? v) (int (* v (random-number)))
+                  :else v)))
+    {}
+    m))
 

@@ -40,7 +40,6 @@
 ; Solution
 
 (reduce (fn [[cnt move sum] e]
-
           (println sum)
           [(if (= (mod (+ sum e) 100) 0)
              (inc cnt)
