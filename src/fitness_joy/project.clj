@@ -1,13 +1,14 @@
-(ns project
+(ns fitness-joy.project
   (:require [clj-http.client :as client]))
 
-;  Testing average function
+; Testing average with reduce function
 
- (apply / (reduce (fn [[sum cnt] e]
-                       [(+ sum e) (inc cnt)])
-                           [0 0]
-                           [10 20 30]))
+; (def reduceTest )
 
+(apply / (reduce (fn [[sum cnt] e]
+                   [(+ sum e) (inc cnt)])
+                 [0 0]
+                 [10 20 30]))
 ; Functions for project
 
 (def exercises (hash-map :pull-ups 5 :dips 10 :push-ups 15 :squats 22))
@@ -16,8 +17,6 @@
 
 (defn average [coll]
   (/ (reduce + coll) (count coll)))
-
-(average (values))
 
 ; Decide which part is stronger (pull or push)
 ; Not done yet!
@@ -40,7 +39,7 @@
         (let [d (Integer/parseInt(read-line))]
           (+ (* a 2) (* b 1.5) c d))))))
 
-(def score (results))
+; (def score (results))
 
 ; Levels:
 
@@ -48,10 +47,11 @@
 ; Intermediate 16-30 points
 ; Advanced 31+ points
 
-(cond
-  (<= 0 score 15) "Beginner level"
-  (<= 16 score 30) "Intermediate level"
-  (>= score 31) "Advanced level")
+(defn assign-level [score]
+  (cond
+    (<= 0 score 15) "Beginner level"
+    (<= 16 score 30) "Intermediate level"
+    (>= score 31) "Advanced level"))
 
 (def users (hash-map :Marko "Beginner" :Lazar "Intermediate" :Milos "Advanced"))
 
@@ -75,23 +75,17 @@
 (defn get-user [{:keys [first-name last-name age level hybrid]}]
                 (println first-name last-name age))
 
-(get-user user1)
-
-; Print -> Lazar Hrebeljanovic 24
-
-; Function Assign level - Checks if selected level is correct for user's score
-
 ; Simulation fetching live fitness data from user's smartwatch
 
 (defn fetch-json [url]
   (let [response (client/get url {:as :json})]
     (:body response)))
 
- (def data (fetch-json "https://mocki.io/v1/4350f790-594d-4936-b740-62c218fe6abc"))
+(def data (fetch-json "https://mocki.io/v1/4350f790-594d-4936-b740-62c218fe6abc"))
 
 (def numbers  (map #(/ % 10) (range 5 11)))
 
-(map #(double %) numbers)
+; (map #(double %) numbers)
 ; => (0.5 0.6 0.7 0.8 0.9 1.0)
 
 (def doubleNums (map #(double %) numbers))
@@ -110,3 +104,4 @@
     {}
     m))
 
+; Function Assign level - Checks if selected level is correct for user's score ??
