@@ -59,3 +59,41 @@
         [0 0 50]
         [-50])
 
+(defn dot [x y]
+  (reduce + (map * x y)))
+
+(time (dotimes [_ 1000000]
+        (dot [(float 1)] [(float 1)])))
+;"Elapsed time: 369.6296 msecs"
+;=> nil
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -30,7 +30,8 @@
 ; loop je kao neko let sidro za recur, ono na sta ce da se recur vrati
 
 (defn f3 [n]
-  (loop [x-1 0 n n]
+  (loop [x-1 0
+         n n]
     (if (< 0 n)
       (recur (inc x-1) (dec n))
       x-1)))
