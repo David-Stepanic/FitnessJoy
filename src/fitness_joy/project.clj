@@ -1,16 +1,6 @@
 (ns fitness-joy.project
   (:require [clj-http.client :as client]))
 
-; Testing average with reduce function
-
-; (def reduceTest )
-
-(apply / (reduce (fn [[sum cnt] e]
-                   [(+ sum e) (inc cnt)])
-                 [0 0]
-                 [10 20 30]))
-; Functions for project
-
 (def exercises (hash-map :pull-ups 5 :dips 10 :push-ups 15 :squats 22))
 
 (def values (vec (vals exercises)))
@@ -104,4 +94,18 @@
     {}
     m))
 
-; Function Assign level - Checks if selected level is correct for user's score ??
+; According to the data, this app will notify the client about the best actions to take
+; at the end of the day, based on their daily activities, acting like a smart AI life coach.
+; Several cases can be defined according to different parameters, where each parameter influences
+; a set of suggestions
+
+; App will listen on live data and have own range for each data, also if multiple data
+; get out of range that will make specific notification, I can make some combinations
+
+; App flow: -taking live data every hour of the day, according to the data notify appears and
+; suggest client what is the best activity for himself at that moment, health success rate ?
+
+; Whoop UPGRADE
+
+; Starving Issue main problem nowadays, hormones are crazy and illness become very common
+; also app will provide weekly and monthly report
