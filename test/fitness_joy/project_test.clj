@@ -1,6 +1,6 @@
 (ns fitness-joy.project-test
   (:require [midje.sweet :refer :all]
-            [fitness-joy.project :refer :all]))
+            [fitness-joy.core :refer :all]))
 
 (fact "update-data should change numeric values in data"
       (let [original data

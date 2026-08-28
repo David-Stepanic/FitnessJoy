@@ -1,4 +1,4 @@
-(ns fitness-joy.project
+(ns fitness-joy.core
   (:require [clj-http.client :as client]))
 
 (def exercises (hash-map :pull-ups 5 :dips 10 :push-ups 15 :squats 22))
@@ -71,7 +71,7 @@
   (let [response (client/get url {:as :json})]
     (:body response)))
 
-(def data (fetch-json "https://mocki.io/v1/4350f790-594d-4936-b740-62c218fe6abc"))
+;(def data (fetch-json "https://mocki.io/v1/4350f790-594d-4936-b740-62c218fe6abc"))
 
 (def numbers  (map #(/ % 10) (range 5 11)))
 
@@ -109,3 +109,24 @@
 
 ; Starving Issue main problem nowadays, hormones are crazy and illness become very common
 ; also app will provide weekly and monthly report
+
+; 2 nacina za koriscenje random:
+
+; 1. nacin da sve bude random i u testovima ali da vodim racuna o distribucijama
+; 2. nacin da koristim seed za random generator
+
+; Testiranje
+
+; JUnit testovi testiraju najmanju mogucu jedinicu (metoda) u izolaciji od ostalih metoda
+; ne moze unit test za metodu koja poziva neku drugu metodu
+
+; Integracioni testovi -> za vise klasa, servisa, kako oni rade zajedno
+
+; Napisi uzor aplikacije u dokumentaciji
+
+; upotrebi mozda: atom, memoize
+
+; Ipsisi funkcije sve sa knjige pa vidi koje ces da koristis
+; kao i cheatsheet
+
+; clojure style guide
