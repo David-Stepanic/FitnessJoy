@@ -1,12 +1,12 @@
 (ns fitness-joy.model.user
   (:require [malli.core :as m]))
 
-(def User
+(def user
   [:map
    [:first-name :string]
    [:last-name :string]
    [:age :int]
-   [:level [:enum :beginner :intermediat :advanced]]])
+   [:level [:enum :beginner :intermediate :advanced]]])
 
 (def sample-user
   {:first-name "David"
