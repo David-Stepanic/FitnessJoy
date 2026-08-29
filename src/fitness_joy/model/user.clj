@@ -1,5 +1,4 @@
-(ns fitness-joy.model.user
-  (:require [malli.core :as m]))
+(ns fitness-joy.model.user)
 
 (def user
   [:map
@@ -10,6 +9,6 @@
 
 (def sample-user
   {:first-name "David"
-   :last-name "Stepanic"
-   :age 26
-   :level :beginner})
+   :last-name  "Stepanic"
+   :age        26
+   :level      :beginner})

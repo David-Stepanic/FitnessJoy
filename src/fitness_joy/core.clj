@@ -20,13 +20,13 @@
 
 (defn results []
   (println "Pull-ups max:")
-  (let [a (Integer/parseInt(read-line))]
+  (let [a (Integer/parseInt (read-line))]
     (println "Dips max:")
-    (let [b (Integer/parseInt(read-line))]
+    (let [b (Integer/parseInt (read-line))]
       (println "Push-up max:")
-      (let [c (Integer/parseInt(read-line))]
+      (let [c (Integer/parseInt (read-line))]
         (println "Squat max:")
-        (let [d (Integer/parseInt(read-line))]
+        (let [d (Integer/parseInt (read-line))]
           (+ (* a 2) (* b 1.5) c d))))))
 
 ; (def score (results))
@@ -50,11 +50,11 @@
 (def user-levels (vals users))
 
 (defn add-user [first last age level hybrid]
-                {:first-name first
-                 :last-name last
-                 :age age
-                 :level level
-                 :hybrid hybrid})
+  {:first-name first
+   :last-name  last
+   :age        age
+   :level      level
+   :hybrid     hybrid})
 
 (def user1 (add-user "Lazar" "Hrebeljanovic" 24 "Advanced" "No"))
 (def user2 (add-user "Milos" "Obilic" 29 "Intermediate" "Yes"))
@@ -63,7 +63,7 @@
 (def user5 (add-user "Jovan" "Memedovic" 58 "Beginner" "Yes"))
 
 (defn get-user [{:keys [first-name last-name age level hybrid]}]
-                (println first-name last-name age))
+  (println first-name last-name age))
 
 ; Simulation fetching live fitness data from user's smartwatch
 
@@ -73,7 +73,7 @@
 
 ;(def data (fetch-json "https://mocki.io/v1/4350f790-594d-4936-b740-62c218fe6abc"))
 
-(def numbers  (map #(/ % 10) (range 5 11)))
+(def numbers (map #(/ % 10) (range 5 11)))
 
 ; (map #(double %) numbers)
 ; => (0.5 0.6 0.7 0.8 0.9 1.0)
@@ -87,10 +87,10 @@
   (reduce-kv
     (fn [acc k v]
       (assoc acc k
-                (cond
-                  (map? v) (update-data v)
-                  (number? v) (int (* v (random-number)))
-                  :else v)))
+                 (cond
+                   (map? v) (update-data v)
+                   (number? v) (int (* v (random-number)))
+                   :else v)))
     {}
     m))
 

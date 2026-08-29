@@ -1,5 +1,4 @@
-(ns fitness-joy.model.event
-  (:require [malli.core :as m]))
+(ns fitness-joy.model.event)
 
 (def event
   [:map
