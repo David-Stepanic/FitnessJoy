@@ -1,6 +1,6 @@
 (ns fitness-joy.model.event)
 
-(def event
+(def Event
   [:map
    [:timestamp :int]
    [:heart-rate [:int {:min 30 :max 220}]]                  ; BPM

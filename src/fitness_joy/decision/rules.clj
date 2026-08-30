@@ -1,18 +1,10 @@
-(ns fitness-joy.decision.rules)
-
-(def default-ranges
-  {:blood-sugar    {:low 3.9 :high 7.8 :unit "mmol/L"}
-   :hydration      {:low 0.5 :high 1.0 :unit "%"}
-   :pressure-upper {:low 90 :high 180 :unit "mmHg"}
-   :pressure-lower {:low 45 :high 100 :unit "mmHg"}
-   :heart-rate     {:low 50 :high 100 :unit "bpm"}
-   :caffeine-mg    {:low 0 :high 400 :unit "mg"}
-   :sleep-quality  {:low 0.2 :high 1.0 :unit "%"}
-   :stress-level   {:low 0.2 :high 1.0 :unit "%"}})
+(ns fitness-joy.decision.rules
+  (:require [fitness-joy.model.range :as ranges]
+            [fitness-joy.model.recommendation :as rec]))
 
 (defn check-parameter
   ([param-key value]
-   (check-parameter param-key value default-ranges))
+   (check-parameter param-key value ranges/default-ranges))
 
   ([param-key value ranges]
    (let [{:keys [low high]} (get ranges param-key)]
@@ -24,7 +16,7 @@
 
 (defn analyze-event
   ([event]
-   (analyze-event event default-ranges))
+   (analyze-event event ranges/default-ranges))
 
   ([event ranges]
    (reduce-kv
@@ -35,3 +27,12 @@
            (assoc acc k status))))
      {}
      event)))
+
+(defn recommend
+  ([analysis]
+   (recommend analysis rec/recommendations))
+
+  ([analysis msgs]
+   (keep (fn [[param status]] (get msgs [param status]))
+         analysis)))
+

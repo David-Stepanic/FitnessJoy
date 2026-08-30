@@ -1,6 +1,6 @@
 (ns fitness-joy.model.user)
 
-(def user
+(def User
   [:map
    [:first-name :string]
    [:last-name :string]
