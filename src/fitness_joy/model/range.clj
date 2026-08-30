@@ -2,7 +2,7 @@
 
 (def default-ranges
   {:blood-sugar    {:low 3.9 :high 7.8 :unit "mmol/L"}
-   :hydration      {:low 0.5 :high 1.0 :unit "%"}
+   :hydration      {:low 0.3 :high 1.0 :unit "%"}
    :pressure-upper {:low 90 :high 180 :unit "mmHg"}
    :pressure-lower {:low 45 :high 100 :unit "mmHg"}
    :heart-rate     {:low 50 :high 100 :unit "bpm"}
