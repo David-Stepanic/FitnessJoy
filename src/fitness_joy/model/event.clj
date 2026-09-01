@@ -3,7 +3,6 @@
 
 (def Event
   [:map
-   [:timestamp :int]
    [:heart-rate [:int {:min 30 :max 220}]]                  ; BPM
    [:pressure-upper [:int    {:min 60  :max 250}]]          ; mmHg
    [:pressure-lower [:int    {:min 30  :max 120}]]          ; mmHg

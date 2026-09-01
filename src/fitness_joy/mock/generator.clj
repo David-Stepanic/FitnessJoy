@@ -1,13 +1,11 @@
-(ns fitness-joy.mock.generator
-  (:require [fitness-joy.model.event :as event]))
+(ns fitness-joy.mock.generator)
 
 (defn rand-between
   [lo hi]
-  (+ lo (* (rand) (- hi lo))))
+  (/ (Math/round (* 10.0 (+ lo (* (rand) (- hi lo))))) 10.0))
 
 (defn random-event []
-  {:timestamp      (System/currentTimeMillis)
-   :heart-rate     (+ 45 (rand-int 85))
+  {:heart-rate     (+ 45 (rand-int 85))
    :blood-sugar    (rand-between 3.0 12.0)
    :hydration      (rand-between 0.1 1.0)
    :pressure-upper (+ 85 (rand-int 130))
