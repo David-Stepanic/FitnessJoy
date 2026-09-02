@@ -1,5 +1,5 @@
 (defproject fitness-joy "0.1.0-SNAPSHOT"
-  :description "Whoop+ — live fitness coaching system"
+  :description "Whoop+ - live fitness coaching system"
   :dependencies [[org.clojure/clojure "1.11.2"]
                  [clj-http "3.12.3"]
                  [cheshire "5.11.0"]

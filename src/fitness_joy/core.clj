@@ -1,132 +1,28 @@
 (ns fitness-joy.core
-  (:require [clj-http.client :as client]))
+  (:require [fitness-joy.mock.generator :as mock]
+            [fitness-joy.state.state :as state]))
 
-(def exercises (hash-map :pull-ups 5 :dips 10 :push-ups 15 :squats 22))
+(defn print-recommendations [recommendations]
+  (if (empty? recommendations)
+    (println "Everything looks good - no recommendations right now.")
+    (doseq [msg recommendations]
+      (println "-" msg))))
 
-(def values (vec (vals exercises)))
+(defn simulate-event!
+  "Generates one mock event, feeds it into the app state and prints the outcome."
+  []
+  (let [event (mock/random-event)]
+    (state/ingest! event)
+    (println "\nNew reading:" event)
+    (println "Analysis:" (state/current-analysis))
+    (println "Recommendations:")
+    (print-recommendations (state/current-recommendations))))
 
-(defn average [coll]
-  (/ (reduce + coll) (count coll)))
-
-; Decide which part is stronger (pull or push)
-; Not done yet!
-
-; Determine training level
-
-; Each pull-up is 2 point
-; Each dip is 1.5 point
-; Each push-up is 1 point
-; Each squat is 1 point
-
-(defn results []
-  (println "Pull-ups max:")
-  (let [a (Integer/parseInt (read-line))]
-    (println "Dips max:")
-    (let [b (Integer/parseInt (read-line))]
-      (println "Push-up max:")
-      (let [c (Integer/parseInt (read-line))]
-        (println "Squat max:")
-        (let [d (Integer/parseInt (read-line))]
-          (+ (* a 2) (* b 1.5) c d))))))
-
-; (def score (results))
-
-; Levels:
-
-; Beginner 0-15 points
-; Intermediate 16-30 points
-; Advanced 31+ points
-
-(defn assign-level [score]
-  (cond
-    (<= 0 score 15) "Beginner level"
-    (<= 16 score 30) "Intermediate level"
-    (>= score 31) "Advanced level"))
-
-(def users (hash-map :Marko "Beginner" :Lazar "Intermediate" :Milos "Advanced"))
-
-(def user-names (map name (keys users)))
-
-(def user-levels (vals users))
-
-(defn add-user [first last age level hybrid]
-  {:first-name first
-   :last-name  last
-   :age        age
-   :level      level
-   :hybrid     hybrid})
-
-(def user1 (add-user "Lazar" "Hrebeljanovic" 24 "Advanced" "No"))
-(def user2 (add-user "Milos" "Obilic" 29 "Intermediate" "Yes"))
-(def user3 (add-user "Novak" "Djokovic" 38 "Advanced" "No"))
-(def user4 (add-user "Jovan" "Jovanovic" 18 "Beginner" "No"))
-(def user5 (add-user "Jovan" "Memedovic" 58 "Beginner" "Yes"))
-
-(defn get-user [{:keys [first-name last-name age level hybrid]}]
-  (println first-name last-name age))
-
-; Simulation fetching live fitness data from user's smartwatch
-
-(defn fetch-json [url]
-  (let [response (client/get url {:as :json})]
-    (:body response)))
-
-;(def data (fetch-json "https://mocki.io/v1/4350f790-594d-4936-b740-62c218fe6abc"))
-
-(def numbers (map #(/ % 10) (range 5 11)))
-
-; (map #(double %) numbers)
-; => (0.5 0.6 0.7 0.8 0.9 1.0)
-
-(def doubleNums (map #(double %) numbers))
-
-(defn random-number []
-  (nth doubleNums (rand-int (count doubleNums))))
-
-(defn update-data [m]
-  (reduce-kv
-    (fn [acc k v]
-      (assoc acc k
-                 (cond
-                   (map? v) (update-data v)
-                   (number? v) (int (* v (random-number)))
-                   :else v)))
-    {}
-    m))
-
-; According to the data, this app will notify the client about the best actions to take
-; at the end of the day, based on their daily activities, acting like a smart AI life coach.
-; Several cases can be defined according to different parameters, where each parameter influences
-; a set of suggestions
-
-; App will listen on live data and have own range for each data, also if multiple data
-; get out of range that will make specific notification, I can make some combinations
-
-; App flow: -taking live data every hour of the day, according to the data notify appears and
-; suggest client what is the best activity for himself at that moment, health success rate ?
-
-; Whoop UPGRADE
-
-; Starving Issue main problem nowadays, hormones are crazy and illness become very common
-; also app will provide weekly and monthly report
-
-; 2 nacina za koriscenje random:
-
-; 1. nacin da sve bude random i u testovima ali da vodim racuna o distribucijama
-; 2. nacin da koristim seed za random generator
-
-; Testiranje
-
-; JUnit testovi testiraju najmanju mogucu jedinicu (metoda) u izolaciji od ostalih metoda
-; ne moze unit test za metodu koja poziva neku drugu metodu
-
-; Integracioni testovi -> za vise klasa, servisa, kako oni rade zajedno
-
-; Napisi uzor aplikacije u dokumentaciji
-
-; upotrebi mozda: atom, memoize
-
-; Ipsisi funkcije sve sa knjige pa vidi koje ces da koristis
-; kao i cheatsheet
-
-; clojure style guide
+(defn -main
+  "Whoop+ live fitness coach - simulates hourly readings and reacts to them."
+  [& args]
+  (state/reset-state!)
+  (println "Starting Whoop+ simulation...")
+  (dotimes [_ 5]
+    (simulate-event!))
+  (println "\nTotal readings processed:" (state/history-count)))
