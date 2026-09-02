@@ -5,10 +5,10 @@
   [:map
    [:heart-rate [:int {:min 30 :max 220}]]                  ; BPM
    [:pressure-upper [:int    {:min 60  :max 250}]]          ; mmHg
-   [:pressure-lower [:int    {:min 30  :max 120}]]          ; mmHg
+   [:pressure-lower [:int {:min 30 :max 150}]]              ; mmHg
    [:blood-sugar [:double {:min 0 :max 30}]]                ; mmol/L
    [:hydration [:double {:min 0 :max 1}]]                   ; 0-1
-   [:caffeine-mg [:int {:min 0 :max 1000}]]                  ; 0-1000 mg
+   [:caffeine-mg [:int {:min 0 :max 1000}]]                 ; 0-1000 mg
    [:sleep-quality [:double {:min 0 :max 1}]]               ; 0-1
    [:stress-level [:double {:min 0 :max 1}]]                ; 0-1
    ])

@@ -5,8 +5,7 @@
   {:current-event   nil
    :analysis        {}
    :recommendations []
-   :history         []
-   :updated-at      nil})
+   :history         []})
 
 (def app-state (atom initial-state))
 
@@ -18,7 +17,6 @@
         (assoc :current-event event)
         (assoc :analysis analysis)
         (assoc :recommendations msgs)
-        (assoc :updated-at (:timestamp event))
         (update :history conj event))))
 
 (defn ingest!
